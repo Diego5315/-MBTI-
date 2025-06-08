@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>你是《白蛇傳》裡的哪個角色？</title>
+  <style>
+    body {
+      font-family: "Noto Serif TC", serif;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Chinese_painting_landscape.jpg/1280px-Chinese_painting_landscape.jpg') no-repeat center center fixed;
+      background-size: cover;
+      padding: 20px;
+      line-height: 1.6;
+      color: #1a1a1a;
+    }
+    .question { display: none; margin-bottom: 30px; background: rgba(255,255,255,0.85); padding: 20px; border-radius: 12px; }
+    .question.active { display: block; }
+    button {
+      font-size: 18px;
+      padding: 15px 30px;
+      margin: 10px;
+      border-radius: 8px;
+      border: 1px solid #999;
+      background-color: #fffdf7;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #f0e8d5;
+    }
+    .preview {
+      margin: 30px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      background: rgba(255,255,255,0.9);
+      padding: 20px;
+      border-radius: 12px;
+    }
+    .preview-item {
+      text-align: center;
+      width: 200px;
+    }
+    .preview-item img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .result {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      background: rgba(240,255,240,0.95);
+      border-radius: 10px;
+      text-align: center;
+    }
+    .result img {
+      width: 200px;
+      margin-top: 10px;
+    }
+    h1 {
+      text-align: center;
+      background: rgba(255,255,255,0.9);
+      padding: 15px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <h1>你是《白蛇傳》裡的哪個角色？</h1>
+
+  <div class="preview">
+    <div class="preview-item">
+      <img src="xuxian.png" alt="許仙">
+      <p>許仙（ISFJ）</p>
+    </div>
+    <div class="preview-item">
+      <img src="baisuzhen.png" alt="白素貞">
+      <p>白素貞（INFJ）</p>
+    </div>
+    <div class="preview-item">
+      <img src="qingji.png" alt="青姬">
+      <p>青姬（ENFP）</p>
+    </div>
+    <div class="preview-item">
+      <img src="jiguang.png" alt="吉光">
+      <p>吉光（INFP）</p>
+    </div>
+  </div>
+
+  <div id="q1" class="question active">
+    <p>1. 當你面對重大抉擇時，你通常會？</p>
+    <button onclick="answer('A')">順著直覺走</button>
+    <button onclick="answer('B')">分析利弊再決定</button>
+  </div>
+  <div id="q2" class="question">
+    <p>2. 你在人際關係中最重視？</p>
+    <button onclick="answer('A')">自由與真實</button>
+    <button onclick="answer('B')">穩定與安全</button>
+    <button onclick="answer('C')">理想與浪漫</button>
+    <button onclick="answer('D')">責任與和平</button>
+  </div>
+  <div id="q3" class="question">
+    <p>3. 朋友遇到困難時，你會？</p>
+    <button onclick="answer('A')">衝第一幫忙</button>
+    <button onclick="answer('B')">默默陪伴</button>
+    <button onclick="answer('C')">給出改變的方向</button>
+    <button onclick="answer('D')">給他理想的幻想與逃避</button>
+  </div>
+  <div id="q4" class="question">
+    <p>4. 你比較常被人形容為…</p>
+    <button onclick="answer('A')">溫柔又堅定</button>
+    <button onclick="answer('B')">天真有理想，感情豐富</button>
+    <button onclick="answer('C')">忍耐沉穩、有責任感</button>
+    <button onclick="answer('D')">開朗自由、有活力</button>
+  </div>
+  <div id="q5" class="question">
+    <p>5. 如果你身處一個無法改變的社會框架，你會？</p>
+    <button onclick="answer('A')">願意委屈自己去融入</button>
+    <button onclick="answer('B')">嘗試改變自己與體制的距離</button>
+    <button onclick="answer('C')">選擇活出真實自我</button>
+    <button onclick="answer('D')">離開現實、追尋理想</button>
+  </div>
+
+  <div id="result" class="result"></div>
+
+  <script>
+    let step = 1;
+    const score = {
+      '許仙': 0,
+      '白素貞': 0,
+      '青姬': 0,
+      '吉光': 0
+    };
+
+    function answer(choice) {
+      switch(step) {
+        case 1:
+          if (choice === 'A') score['青姬']++, score['吉光']++;
+          else score['許仙']++, score['白素貞']++;
+          break;
+        case 2:
+          if (choice === 'A') score['青姬']++;
+          else if (choice === 'B') score['許仙']++;
+          else if (choice === 'C') score['吉光']++;
+          else score['白素貞']++;
+          break;
+        case 3:
+          if (choice === 'A') score['白素貞']++;
+          else if (choice === 'B') score['許仙']++;
+          else if (choice === 'C') score['青姬']++;
+          else score['吉光']++;
+          break;
+        case 4:
+          if (choice === 'A') score['白素貞']++;
+          else if (choice === 'B') score['吉光']++;
+          else if (choice === 'C') score['許仙']++;
+          else score['青姬']++;
+          break;
+        case 5:
+          if (choice === 'A') score['白素貞']++;
+          else if (choice === 'B') score['許仙']++;
+          else if (choice === 'C') score['青姬']++;
+          else score['吉光']++;
+          break;
+      }
+      document.getElementById('q' + step).classList.remove('active');
+      step++;
+      const next = document.getElementById('q' + step);
+      if (next) next.classList.add('active');
+      else showResult();
+    }
+
+    function showResult() {
+      const resultDiv = document.getElementById('result');
+      let max = 0;
+      let chosen = '';
+      for (const key in score) {
+        if (score[key] > max) {
+          max = score[key];
+          chosen = key;
+        }
+      }
+      const imageMap = {
+        '許仙': 'xuxian.png',
+        '白素貞': 'baisuzhen.png',
+        '青姬': 'qingji.png',
+        '吉光': 'jiguang.png'
+      };
+      const resultText = {
+        '許仙': '你是【許仙】── 忠誠的守護者，溫柔而猶豫，責任感強，卻容易錯失真愛。',
+        '白素貞': '你是【白素貞】── 理想的捍衛者，溫婉理性，為愛犧牲一切，深情又堅毅。',
+        '青姬': '你是【青姬】── 自由的激勵者，活潑坦率，勇於愛也勇於改變。',
+        '吉光': '你是【吉光】── 浪漫的理想主義者，夢想與情感驅動，是幻想與現實的橋梁。'
+      };
+      resultDiv.innerHTML = `<h2>${resultText[chosen]}</h2><img src="${imageMap[chosen]}" alt="${chosen}" />`;
+      resultDiv.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
